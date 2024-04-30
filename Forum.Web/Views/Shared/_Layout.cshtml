@@ -1,0 +1,102 @@
+﻿﻿@{
+    bool isAdmin = User.IsInRole("Admin");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Forum.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 mx-5">
+            <a class="navbar-brand" asp-area="" asp-controller="Topic" asp-action="Index">Forum.Web</a>
+            <ul class="navbar-nav d-flex flex-grow-1">
+
+                @if (User.Identity?.IsAuthenticated == false)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Topic" asp-action="Index">News Feed</a>
+                    </li>
+                    <li class="nav-item me-auto">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Topic" asp-action="Archive">Archive</a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="form-inline d-flex mx-3" asp-area="" asp-controller="User" asp-action="UserProfileByEmail" method="get">
+                            <input class="form-control mx-2" type="search" placeholder="Search Email" aria-label="Search" name="email">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                    </li>
+                }
+                else
+                {
+                    @if (isAdmin)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Topic" asp-action="Topics">Topics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Topic" asp-action="Archive">Archive</a>
+                        </li>
+                        <li class="nav-item me-auto">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="Users">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <form class="form-inline d-flex mx-3" asp-area="" asp-controller="User" asp-action="UserProfileByEmail" method="get">
+                                <input class="form-control mx-2" type="search" placeholder="Search Email" aria-label="Search" name="email">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Topic" asp-action="Index">News Feed</a>
+                        </li>
+                        <li class="nav-item me-auto">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Topic" asp-action="Archive">Archive</a>
+                        </li>
+                        <li class="nav-item">
+                            <form class="form-inline d-flex mx-3" asp-area="" asp-controller="User" asp-action="UserProfileByEmail" method="get">
+                                <input class="form-control mx-2" type="search" placeholder="Search Email" aria-label="Search" name="email">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Profile">@User.Identity?.Name</a>
+                    </li>
+                    <li class="nav-item ml-auto">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Forum.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

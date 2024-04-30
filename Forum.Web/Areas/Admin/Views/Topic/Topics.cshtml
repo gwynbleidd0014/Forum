@@ -1,0 +1,12 @@
+﻿@using Forum.Application.Topics.Response
+@using Forum.Domain.Enums
+@model List<TopicAdminResponseModelWithCommentCount>
+
+@{
+    ViewBag.Title = "Topics";
+    ViewBag.Action = "Topics";
+}
+
+<div>
+    @await Html.PartialAsync("_TopicsPartial", Model)
+</div>

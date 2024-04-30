@@ -1,0 +1,17 @@
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\bin\Debug\net6.0\Forum.Infrastructure.deps.json
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\bin\Debug\net6.0\Forum.Infrastructure.dll
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\bin\Debug\net6.0\Forum.Infrastructure.pdb
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\bin\Debug\net6.0\Forum.Domain.dll
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\bin\Debug\net6.0\Forum.Persistance.dll
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\bin\Debug\net6.0\Forum.Domain.pdb
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\bin\Debug\net6.0\Forum.Persistance.pdb
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\obj\Debug\net6.0\Forum.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\obj\Debug\net6.0\Forum.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\obj\Debug\net6.0\Forum.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\obj\Debug\net6.0\Forum.Infrastructure.AssemblyInfo.cs
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\obj\Debug\net6.0\Forum.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\obj\Debug\net6.0\Forum.In.4C8C4B0C.Up2Date
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\obj\Debug\net6.0\Forum.Infrastructure.dll
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\obj\Debug\net6.0\refint\Forum.Infrastructure.dll
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\obj\Debug\net6.0\Forum.Infrastructure.pdb
+C:\Users\mrnem\source\repos\Forum\Forum.Infrastructure\obj\Debug\net6.0\ref\Forum.Infrastructure.dll

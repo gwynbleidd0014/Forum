@@ -1,0 +1,13 @@
+﻿@using Forum.Application.Topics.Response
+@using Forum.Common.Paging
+@model List<TopicResponseModelWithCommentCount>
+
+@{
+    ViewBag.Title = "Topics";
+    ViewBag.Action = "UserTopics";
+}
+
+
+<div>
+    @await Html.PartialAsync("_TopicsPartial", Model)
+</div>

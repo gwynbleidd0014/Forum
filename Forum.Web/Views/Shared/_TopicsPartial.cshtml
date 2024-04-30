@@ -1,0 +1,65 @@
+﻿@using Forum.Application.Topics.Response
+@using Forum.Common.Paging
+@model List<TopicResponseModelWithCommentCount>
+
+
+@{
+    Pager pager = new();
+    int pageNo = 0;
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+
+}
+
+
+<div class="container">
+    @if (Model.Count == 0)
+    {
+        <div class="row text-center">
+            <h4>No Topics Were Found</h4>
+        </div>
+    }
+    else
+    {
+        @if (User.Identity?.IsAuthenticated == true && User.IsInRole("User"))
+        {
+            <div class="row justify-content-start mb-3">
+                <div class="col-3">
+                    <a class="btn btn-success" asp-area="User" asp-controller="Topic" asp-action="Add">Create Topic</a>
+                </div>
+            </div>
+        }
+        <div>
+            @await Html.PartialAsync("_PagerPartial", pager)
+        </div>
+
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-stripped">
+                    <th>Topic Name</th>
+                    <th>Number of Comments</th>
+                    <th>Author</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var topic in Model)
+                {
+                    <tr class="table-stripped">
+                        <td>@topic.Name </td>
+                        <td>@topic.CommentCount</td>
+                        <td>@topic.Author</td>
+                        <td><div class="badge @(topic.Status == "Active" ? "badge-success" : "badge-danger")">@topic.Status</div></td>
+                        <td><a asp-controller="Topic" asp-action="Get" asp-route-id="@topic.Id" class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">View Topic </a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+

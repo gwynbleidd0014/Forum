@@ -1,0 +1,81 @@
+﻿@using Forum.Application.Topics.Response
+@using Forum.Domain.Enums
+@model TopicResponseModel
+
+@{
+    var topicAge = Model.DaysOld == 0 ? "Today" : $"{Model.DaysOld.ToString()} Days Ago";
+    var imgPath = Model.AuthorImgPath ?? @"/defaultProfile.jpg";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>@Model.Name</h3>
+                </div>
+                <div class="card-header">
+                    <div class="media d-flex w-100 align-items-center flex-row">
+                        <a asp-controller="User" asp-action="UserProfile" asp-route-id="@Model.AuthorId" class="no-a-style">
+                            <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="@imgPath" />
+                        </a>
+                        <div class="media-body ml-3 me-auto">
+                            <a asp-controller="User" asp-action="UserProfile" asp-route-id="@Model.Author" class="no-a-style">
+                            <div>@Model.Author</div>
+                            </a>
+                            <div>@topicAge</div>
+                        </div>
+                        <div>
+                            <span class="badge @(Model.Status == "Active" ? "badge-success" : "badge-danger")">@Model.Status</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-lg-5">
+                    <p>
+                        @Model.Text
+                    </p>
+                </div>
+                <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
+                    <div class="px-4 pt-3">
+                        @Model.Comments.Count Comments
+                    </div>
+                    @if (User.Identity?.IsAuthenticated == true && Model.Status == TopicStatus.Active.ToString())
+                    {
+                        <div class="px-4 pt-3">
+                            <a asp-area="User" asp-controller="Comment" asp-action="Add" asp-route-topicId="@Model.Id">
+                                <button type="submit" class="btn btn-primary">Reply</button>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row flex-column">
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="d-flex flex-row mb-lg-5 col-md-10">
+                <a asp-controller="User" asp-action="UserProfile" asp-route-id="@comment.UserId" class="no-a-style">
+                    <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="@(comment.AuthorImgPath ?? @"/defaultProfile.jpg")" />
+                </a>
+                <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30 flex-grow-1">
+                    <div class="g-mb-15">
+                        <a asp-controller="User" asp-action="UserProfile" asp-route-id="@comment.UserId" class="no-a-style">
+                            <h5 class="h5 g-color-gray-dark-v1 mb-0">@comment.Author</h5>
+                        </a>
+                        <span class="g-color-gray-dark-v4 g-font-size-12">@(comment.DaysOld == 0 ? "Today" : $"{comment.DaysOld.ToString()} Days Ago")</span>
+                        <p>@comment.Text</p>
+                    </div>
+                    <div class="d-flex flex-row-reverse">
+                        @if (User.Identity?.IsAuthenticated == true && comment.Author == User.Identity?.Name)
+                        {
+                            <a asp-area="User" asp-controller="Comment" asp-action="Delete" asp-route-id="@comment.Id" asp-route-topicId="@Model.Id" class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover mr-5">
+                                Delete
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

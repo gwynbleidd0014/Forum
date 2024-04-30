@@ -1,0 +1,12 @@
+﻿@using Forum.Application.Users.Response
+@model UserResponseModel
+
+
+@{
+    string imgPath = Model.ImgPath ?? $"/defaultProfile.jpg";
+}
+
+
+ <img class="custom-image rounded" src="@imgPath" />
+
+

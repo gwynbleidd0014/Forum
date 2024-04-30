@@ -1,0 +1,25 @@
+﻿@using Forum.Application.Comments.Request
+@model CommentRequestModel
+
+@{
+    ViewBag.Title = "Add Comment";
+}
+
+<div id="new-comment-form">
+    <form asp-action="Add" asp-controller="Comment">
+        <input asp-for="TopicId" value="@ViewBag.TopicId" hidden />
+        <div class="form-group mb-3">
+            <label asp-for="Text" class="control-label">Comment</label>
+            <textarea asp-for="Text" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Text" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("~/Views/Shared/_ValidationScriptsPartial.cshtml");
+    }
+}

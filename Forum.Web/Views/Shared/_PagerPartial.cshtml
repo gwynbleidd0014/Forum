@@ -1,0 +1,37 @@
+﻿@using Forum.Common.Paging
+@model Pager
+
+<div class="container">
+    @if (Model.TotalPages > 0)
+    {
+        <ul class="pagination justify-content-end">
+
+            @if (Model.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="@((ViewBag?.Controller != null) ? ViewBag?.Controller : "Topic")" asp-action="@ViewBag?.Action" asp-route-pg="1" asp-route-id="@ViewBag?.UserId">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" asp-controller="@((ViewBag?.Controller != null) ? ViewBag?.Controller : "Topic")" asp-action="@ViewBag?.Action" asp-route-pg="@(Model.CurrentPage - 1)" asp-route-id="@ViewBag?.UserId">Previous</a>
+                </li>
+            }
+
+            @for (int pge = Model.StartPage; pge <= Model.EndPage; pge++)
+            {
+                <li class="page-item @(pge == Model.CurrentPage ? "active": "")">
+                    <a class="page-link" asp-controller="@((ViewBag?.Controller != null) ? ViewBag?.Controller : "Topic")" asp-action="@ViewBag?.Action" asp-route-pg="@pge" asp-route-id="@ViewBag?.UserId">@pge</a>
+                </li>
+            }
+
+            @if (Model.CurrentPage < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="@((ViewBag?.Controller != null) ? ViewBag?.Controller : "Topic")" asp-action="@ViewBag?.Action" asp-route-pg="@(Model.CurrentPage + 1)" asp-route-id="@ViewBag?.UserId">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" asp-controller="@((ViewBag?.Controller != null) ? ViewBag?.Controller : "Topic")" asp-action="@ViewBag?.Action" asp-route-pg="@Model.TotalPages" asp-route-id="@ViewBag?.UserId">Last</a>
+                </li>
+            }
+        </ul>
+    }
+</div>

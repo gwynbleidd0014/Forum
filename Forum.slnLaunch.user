@@ -1,0 +1,19 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Name": "Forum.Web\\Forum.Web.csproj",
+        "Action": "Start"
+      },
+      {
+        "Name": "Forum.Api\\Forum.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Name": "Forum.Workers\\Forum.Workers.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

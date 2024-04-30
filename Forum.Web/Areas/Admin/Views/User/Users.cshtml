@@ -1,0 +1,54 @@
+﻿@using Forum.Application.Users.Response
+@using Forum.Common.Paging
+@model List<UserResponseModel>
+
+@{
+    ViewBag.Title = "Users";
+    ViewBag.Action = "Users";
+    ViewBag.Controller = "User";
+
+    Pager pager = new();
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+    }
+}
+
+<div>
+    <div>
+        @await Html.PartialAsync("~/Views/Shared/_PagerPartial.cshtml", pager)
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-striped">
+                <th>Username</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr class="table-striped">
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <th><div class="badge @(user.IsBanned ? "badge-danger" : "badge-success")">@(user.IsBanned ? "Banned" : "Active")</div></th>
+                    <td>
+                    <form asp-action="@(user.IsBanned ? "UnBan" : "Ban")" method="post">
+                        <input hidden value="@user.Id" name="id"/>
+                        <button class="btn btn-primary" type="submit">
+                            @(user.IsBanned ? "Unban" : "Ban")
+                        </button>
+                    </form>
+                    </td>
+                    <td>
+                        <a asp-area="" asp-controller="User" asp-action="UserProfile" asp-route-id="@user.Id" class="btn btn-primary">View</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
